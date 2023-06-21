@@ -11,6 +11,5 @@ public interface ITwilioMessageMapper {
     @Mapping(target = "uniqueMessageIdentifier", source = "sid")
     @Mapping(target = "cellPhone", source = "to")
     @Mapping(target = "bodyMessage", source = "body")
-    @Mapping(target = "priceMessage", source = "price")
     TwilioMessageModel messageToTwilioMessageModel(Message message);
 }

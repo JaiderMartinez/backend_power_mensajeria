@@ -1,6 +1,7 @@
 package com.reto.twilio.domain.usecase;
 
 import com.reto.twilio.domain.api.ISmsNotificationSenderServicePort;
+import com.reto.twilio.domain.model.SmsMessageBuilder;
 import com.reto.twilio.domain.model.TwilioMessageModel;
 import com.reto.twilio.domain.spi.ITwilioSmsServiceProvider;
 
@@ -13,14 +14,13 @@ public class SmsNotificationSenderUseCase implements ISmsNotificationSenderServi
     }
 
     @Override
-    public TwilioMessageModel sendMessageNotificationToCustomer(String cellPhone, String restaurantName, String customerName, Long orderPin) {
-        if (!cellPhone.startsWith("+")) {
-            cellPhone  = "+57" + cellPhone;
+    public TwilioMessageModel sendMessageNotificationToCustomer(SmsMessageBuilder smsMessageBuilder) {
+        if (!smsMessageBuilder.getCustomerCellPhone().startsWith("+")) {
+            smsMessageBuilder.setCustomerCellPhone("+57" + smsMessageBuilder.getCustomerCellPhone());
         }
         TwilioMessageModel requestToSendCellPhoneAMessageToCustomer = new TwilioMessageModel();
-        requestToSendCellPhoneAMessageToCustomer.setCellPhone(cellPhone);
-        String messageBodyToSend = "!Hola " + customerName + " tu pedido del restaurante" + restaurantName + " con el pin " + orderPin + " se encuentra listo, por favor acercase a caja";
-        requestToSendCellPhoneAMessageToCustomer.setBodyMessage(messageBodyToSend);
+        requestToSendCellPhoneAMessageToCustomer.setCellPhone(smsMessageBuilder.getCustomerCellPhone());
+        requestToSendCellPhoneAMessageToCustomer.setBodyMessage(smsMessageBuilder.generateMessage());
         return this.twilioSmsServiceProvider.sendNotification(requestToSendCellPhoneAMessageToCustomer);
     }
 }

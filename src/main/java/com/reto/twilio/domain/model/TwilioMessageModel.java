@@ -1,5 +1,7 @@
 package com.reto.twilio.domain.model;
 
+import java.time.LocalDate;
+
 public class TwilioMessageModel {
 
     private String uniqueMessageIdentifier;
@@ -8,20 +10,24 @@ public class TwilioMessageModel {
     private String errorCode;
     private String errorMessage;
     private String status;
-    private String priceMessage;
+    private String direction;
+    private LocalDate dateCreated;
+    private LocalDate dateUpdated;
 
     public TwilioMessageModel() {
     }
 
-    public TwilioMessageModel(String uniqueMessageIdentifier, String cellPhone, String bodyMessage, String errorCode, String errorMessage,
-                              String status, String priceMessage) {
+    public TwilioMessageModel(String uniqueMessageIdentifier, String cellPhone, String bodyMessage, String errorCode,
+                              String errorMessage, String status, String direction, LocalDate dateCreated, LocalDate dateUpdated) {
         this.uniqueMessageIdentifier = uniqueMessageIdentifier;
         this.cellPhone = cellPhone;
         this.bodyMessage = bodyMessage;
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
         this.status = status;
-        this.priceMessage = priceMessage;
+        this.direction = direction;
+        this.dateCreated = dateCreated;
+        this.dateUpdated = dateUpdated;
     }
 
     public String getUniqueMessageIdentifier() {
@@ -72,11 +78,27 @@ public class TwilioMessageModel {
         this.status = status;
     }
 
-    public String getPriceMessage() {
-        return priceMessage;
+    public String getDirection() {
+        return direction;
     }
 
-    public void setPriceMessage(String priceMessage) {
-        this.priceMessage = priceMessage;
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public LocalDate getDateUpdated() {
+        return dateUpdated;
+    }
+
+    public void setDateUpdated(LocalDate dateUpdated) {
+        this.dateUpdated = dateUpdated;
     }
 }

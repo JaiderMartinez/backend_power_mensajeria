@@ -15,6 +15,12 @@ Está construido con Spring Security, Spring Boot y Swagger para la documentaci�
 El servicio de mensajería utiliza el software/API de Twilio para enviar mensajes de texto (SMS). La integración con Twilio permite enviar notificaciones, 
 alertas o cualquier tipo de mensaje de texto a los destinatarios especificados.
 
+Solo se pueden enviar a un número de teléfono verificado, cuando envíe un SMS desde su número de teléfono de prueba gratuito, comenzará con "Sent from your Twilio trial account -".<br>
+
+La longitud de los mensajes SMS está limitada a 160 caracteres, Cuando se envía un mensaje SMS que excede el límite de caracteres, Twilio automáticamente dividirá el mensaje en segmentos 
+y los enviará de manera concatenada. Sin embargo, ten en cuenta que cada segmento se contará y cobrará por separado como un mensaje individual. Además, algunos caracteres especiales y emojis 
+pueden ocupar más espacio en un segmento y reducir aún más la cantidad de caracteres disponibles.
+
 ## Requisitos previos
 
 <ul>
@@ -31,15 +37,15 @@ En el archivo application.properties, proporcione las siguientes propiedades:
     
     twilio.account.sid= "your-twilio-account-sid"
     twilio.auth.token= "your-twilio-auth-token" 
-    twilio.phone.from= "your-twilio-phone-number" 
+    twilio.phone.from= "your-twilio-phone-number-from" 
 
 <li>Accede a la documentación de la API:</li><br>
-Abra su navegador web y vaya a http://localhost:9280/swagger-ui.html para ver e interactuar con la API mediante Swagger.
+Abra su navegador web y vaya a <a href="http://localhost:9280/swagger-ui.html">http://localhost:9280/swagger-ui.html</a> para ver e interactuar con la API mediante Swagger.
 </ol>
 
 ## API Endpoints
 
-<h2>Notificar que el pedido está listo</h2>
+### Notificar que el pedido está listo
 
 <ul>
     <li>URL: '/messenger-service/notify'</li>
@@ -49,9 +55,21 @@ Abra su navegador web y vaya a http://localhost:9280/swagger-ui.html para ver e 
 
     {
       "orderPin" : 11111
-      "restaurantName": "Sample Restaurant",
+      "restaurantName": "nombre del restaurante",
       "customerName": "John Doe",
       "customerCellPhone": "+573983458212"
+    }
+
+
+<li>Respuesta de la solicitud: </li>
+
+    {
+      "status": "QUEUED",
+      "errorCode": "null",
+      "errorMessage": "null",
+      "direction": "OUTBOUND_API",
+      "dateCreated": "2023-06-21",
+      "dateUpdated": "2023-06-21"
     }
 </ul>
 
@@ -62,5 +80,5 @@ La API está protegida mediante Spring Security y el control de acceso basado en
 ### Configuracion
 <ul>
     <li>server.port: Puerto en el que se ejecuta el microservicio (default: 9280)</li>
-    <li>access.token.secret: Clave secreta para la generación del token de acceso</li>
+    <li>access.token.secret: Clave secreta para la desencriptación del token de acceso</li>
 </ul>

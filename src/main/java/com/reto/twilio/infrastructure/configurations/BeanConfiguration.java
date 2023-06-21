@@ -12,7 +12,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 public class BeanConfiguration {
-    private ITwilioMessageMapper twilioMessageMapper;
+
+    private final ITwilioMessageMapper twilioMessageMapper;
 
     @Bean
     public ITwilioSmsServiceProvider twilioSmsServiceProvider() {
