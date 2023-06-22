@@ -50,6 +50,6 @@ public class SmsMessageBuilder {
     }
 
     public String generateMessage() {
-        return " :: Estimado cliente " + this.customerName + " su pedido con el pin " + this.orderPin + " esta listo para ser recogido en el restaurante " + this.restaurantName;
+        return " Estimado cliente " + this.customerName + " su pedido del restaurante " + this.restaurantName + " con el pin " + this.orderPin + " esta listo para ser recogido";
     }
 }

@@ -17,6 +17,11 @@ public class TwilioMessageModel {
     public TwilioMessageModel() {
     }
 
+    public TwilioMessageModel(String cellPhone, String bodyMessage) {
+        this.cellPhone = cellPhone;
+        this.bodyMessage = bodyMessage;
+    }
+
     public TwilioMessageModel(String uniqueMessageIdentifier, String cellPhone, String bodyMessage, String errorCode,
                               String errorMessage, String status, String direction, LocalDate dateCreated, LocalDate dateUpdated) {
         this.uniqueMessageIdentifier = uniqueMessageIdentifier;

@@ -35,6 +35,7 @@ public class EmployeeController {
             description = "Object to form the body of the message to be sent to the customer", required = true,
             schema = @Schema(implementation = OrderNotificationRequestDto.class))
             @RequestBody OrderNotificationRequestDto orderNotificationRequestDto) {
-        return new ResponseEntity<>(this.employeeService.notifyThatOrderIsReady(orderNotificationRequestDto), HttpStatus.CREATED);
+        final OrderNotifiedResponseDto orderNotifiedAndDeliveredResponse = this.employeeService.notifyThatOrderIsReady(orderNotificationRequestDto);
+        return new ResponseEntity<>(orderNotifiedAndDeliveredResponse, HttpStatus.CREATED);
     }
 }

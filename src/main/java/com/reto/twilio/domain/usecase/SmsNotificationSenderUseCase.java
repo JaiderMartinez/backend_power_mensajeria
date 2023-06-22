@@ -18,9 +18,9 @@ public class SmsNotificationSenderUseCase implements ISmsNotificationSenderServi
         if (!smsMessageBuilder.getCustomerCellPhone().startsWith("+")) {
             smsMessageBuilder.setCustomerCellPhone("+57" + smsMessageBuilder.getCustomerCellPhone());
         }
-        TwilioMessageModel requestToSendCellPhoneAMessageToCustomer = new TwilioMessageModel();
-        requestToSendCellPhoneAMessageToCustomer.setCellPhone(smsMessageBuilder.getCustomerCellPhone());
-        requestToSendCellPhoneAMessageToCustomer.setBodyMessage(smsMessageBuilder.generateMessage());
-        return this.twilioSmsServiceProvider.sendNotification(requestToSendCellPhoneAMessageToCustomer);
+        TwilioMessageModel messageToSentToTheCustomerCellPhone = new TwilioMessageModel();
+        messageToSentToTheCustomerCellPhone.setCellPhone(smsMessageBuilder.getCustomerCellPhone());
+        messageToSentToTheCustomerCellPhone.setBodyMessage(smsMessageBuilder.generateMessage());
+        return this.twilioSmsServiceProvider.sendNotification(messageToSentToTheCustomerCellPhone);
     }
 }
